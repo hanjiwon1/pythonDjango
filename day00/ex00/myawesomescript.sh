@@ -6,10 +6,10 @@
 #    By: jiwhan <jiwhan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/26 19:17:14 by jiwhan            #+#    #+#              #
-#    Updated: 2021/07/26 20:46:06 by jiwhan           ###   ########.fr        #
+#    Updated: 2021/07/28 13:37:51 by jiwhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #!/bin/sh
 
-curl -s -I $1 | grep 'Location' | cut -f2 -d ' '
+curl -s -I $1 | grep 'ocation' | cut -f2 -d ' '
