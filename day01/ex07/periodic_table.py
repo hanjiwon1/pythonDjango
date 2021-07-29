@@ -6,7 +6,7 @@
 #    By: jiwhan <jiwhan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/29 16:50:35 by jiwhan            #+#    #+#              #
-#    Updated: 2021/07/29 20:03:09 by jiwhan           ###   ########.fr        #
+#    Updated: 2021/07/29 20:26:01 by jiwhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ def read_txt():
 		number = int(temp[1].split(':')[1])
 		small = temp[2].split(': ')[1]
 		molar = float(temp[3].split(':')[1])
-		electron = temp[4].split(':')[1]
+		electron = list(map(int, (temp[4].split(':')[1]).split(' ')))
 		element_list.append([name, position, number, small, molar, electron])
 	r.close()
 	return element_list
@@ -50,7 +50,7 @@ def create_html(element):
 		f.write("""<tr>""")
 		for j in range(18):
 			if element[k][1] == j:
-				f.write("""<td style="border: 1px solid black; padding:10px;"><h4>{name}</h4><ul><li>No {number}</li><li>{small}</li><li>{molar}</li><li>{electron} electron</li></ul></td>""".format(name = element[k][0], number = element[k][2], small = element[k][3], molar = element[k][4], electron = len(element[k][5])))
+				f.write("""<td style="border: 1px solid black; padding:10px;"><h4>{name}</h4><ul><li>No {number}</li><li>{small}</li><li>{molar}</li><li>{electron} electron</li></ul></td>""".format(name = element[k][0], number = element[k][2], small = element[k][3], molar = element[k][4], electron = element[k][5]))
 				k = k+1
 			else:
 				f.write("""<td style="border: 1px solid black; padding:10px"></td>""")
