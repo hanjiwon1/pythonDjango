@@ -6,7 +6,7 @@
 #    By: jiwhan <jiwhan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/29 16:50:35 by jiwhan            #+#    #+#              #
-#    Updated: 2021/07/29 19:44:31 by jiwhan           ###   ########.fr        #
+#    Updated: 2021/07/29 20:03:09 by jiwhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ def create_html(element):
 	<title>Document</title>
 </head>
 <body>
-	<table style="border: 1px; solid width 300px">
+	<table style="border: 1px solid black; padding:10px">
 		<thead>
 			<tr>
 				<th colspan="18">The Mendeleev's table</th>
@@ -46,19 +46,16 @@ def create_html(element):
 		<tbody>"""
 	f.write(head)
 	k = 0
-	for i in range(9):
+	for i in range(7):
 		f.write("""<tr>""")
 		for j in range(18):
-			if k == 88:
-				break
 			if element[k][1] == j:
-				f.write("""<td style="border: 1px solid black; padding:10px"><h4>{name}</h4><ul><li>No {number}</li><li>{small}</li><li>{molar}</li><li>{electron} electron</li></ul></td>""".format(name = element[k][0], number = element[k][2], small = element[k][3], molar = element[k][4], electron = element[k][5]))
+				f.write("""<td style="border: 1px solid black; padding:10px;"><h4>{name}</h4><ul><li>No {number}</li><li>{small}</li><li>{molar}</li><li>{electron} electron</li></ul></td>""".format(name = element[k][0], number = element[k][2], small = element[k][3], molar = element[k][4], electron = len(element[k][5])))
 				k = k+1
 			else:
 				f.write("""<td style="border: 1px solid black; padding:10px"></td>""")
-
 		f.write("""</tr>""")
-	f.write("""		</tbody></table></body></html>""")
+	f.write("""</tbody></table></body></html>""")
 	f.close()
 
 def create_table():
