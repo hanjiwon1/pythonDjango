@@ -19,7 +19,6 @@ def render(file_name):
 	f_html = open("{fname}.html".format(fname = fname), "w")
 	f_html.write(script.format(title = title, name = name, surname = surname, age = age, profession = profession))
 	f_html.close()
-	print(globals())
 
 if __name__ == '__main__':
 	render(sys.argv)
