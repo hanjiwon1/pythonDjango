@@ -98,7 +98,7 @@ class Elem:
                 (type(content) == list and all([type(elem) == Text or
                                                 isinstance(elem, Elem)
                                                 for elem in content])))
-def test():
+def elem_test():
     html = Elem('html', content=[
                 Elem('head', content=Elem(
                     'title', content=Text('"Hello ground!"'))),
@@ -106,4 +106,4 @@ def test():
     print(html)
 
 if __name__ == '__main__':
-    test()
+    elem_test()

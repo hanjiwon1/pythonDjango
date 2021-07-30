@@ -44,7 +44,7 @@ class Cappuccino(HotBeverage):
 	def description(self):
 		return "Un po’ di Italia nella sua tazza!"
 
-def beverages():
+def beverages_test():
 	hb = HotBeverage()
 	print(hb)
 	co = Coffee()
@@ -57,4 +57,4 @@ def beverages():
 	print(ca)
 	
 if __name__ == '__main__':
-	beverages()
+	beverages_test()
