@@ -94,16 +94,10 @@ class Elem:
         Is this object a HTML-compatible Text instance or a Elem, or even a
         list of both?
         """
-        return (isinstance(content, Elem) or type(content) == Text or
-                (type(content) == list and all([type(elem) == Text or
-                                                isinstance(elem, Elem)
-                                                for elem in content])))
-def elem_test():
-    html = Elem('html', content=[
-                Elem('head', content=Elem(
-                    'title', content=Text('"Hello ground!"'))),
-                Elem('body', content=[Elem('h1', content=Text('"Oh no, not again!"')), Elem('img', {'src': 'http://i.imgur.com/pfp3T.jpg'}, tag_type='simple')])])
+        return (isinstance(content, Elem) or type(content) == Text or (type(content) == list and all([type(elem) == Text or  isinstance(elem, Elem) for elem in content])))
+def test():
+    html = Elem('html', content=[Elem('head', content=Elem('title', content=Text('"Hello ground!"'))), Elem('body', content=[Elem('h1', content=Text('"Oh no, not again!"')), Elem('img', {'src': 'http://i.imgur.com/pfp3T.jpg'}, tag_type='simple')])])
     print(html)
 
 if __name__ == '__main__':
-    elem_test()
+    test()
