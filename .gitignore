@@ -1,1 +1,4 @@
-.DS_Store
+./d03/ex01/local_lib/
+./d03/ex01/install_path.log
+./d02/ex00/__pycache__/ ./d02/ex03/__pycache__/ ./d02/ex04/__pycache__/ ./d02/ex05/__pycache__/ ./d02/ex06/__pycache__/
+./d02/ex00/__pycache__/ ./d02/ex03/__pycache__/ ./d02/ex04/__pycache__/ ./d02/ex05/__pycache__/ ./d02/ex06/__pycache__/
