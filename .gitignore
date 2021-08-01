@@ -2,3 +2,7 @@
 ./d03/ex01/install_path.log
 ./d02/ex00/__pycache__/ ./d02/ex03/__pycache__/ ./d02/ex04/__pycache__/ ./d02/ex05/__pycache__/ ./d02/ex06/__pycache__/
 ./d02/ex00/__pycache__/ ./d02/ex03/__pycache__/ ./d02/ex04/__pycache__/ ./d02/ex05/__pycache__/ ./d02/ex06/__pycache__/
+./d03/ex05/ex05env/bin d03/ex05/ex05env/include d03/ex05/ex05env/lib d03/ex05/ex05env/lib64 d03/ex05/ex05env/pyvenv.cfg ./d03/ex05/ex05env/share
+./d03/ex04/django_env/bin ./d03/ex04/django_env/include ./d03/ex04/django_env/lib ./d03/ex04/django_env/lib64 ./d03/ex04/django_env/pyvenv.cfg ./d03/ex04/django_env/share
+./d03/ex03/ex03env/bin ./d03/ex03/ex03env/include ./d03/ex03/ex03env/lib ./d03/ex03/ex03env/lib64 ./d03/ex03/ex03env/pyvenv.cfg ./d03/ex03/ex03env/share
+./d03/ex02/ex02/bin ./d03/ex02/ex02/include ./d03/ex02/ex02/lib ./d03/ex02/ex02/lib64 ./d03/ex02/ex02/pyvenv.cfg ./d03/ex02/ex02/share
