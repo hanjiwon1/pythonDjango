@@ -25,7 +25,7 @@ class roads_to_philosophy:
         self.prev.append(title)
         print(title)
         if title == 'Philosophy':
-            return print("{} roads from {} to Philosophy".format(len(self.prev), self.prev[0] if len(self.prev) > 0 else 'Philosophy'))
+            return print("{} roads from {} to Philosophy !".format(len(self.prev), self.prev[0] if len(self.prev) > 0 else 'Philosophy'))
         content = soup.find(id='mw-content-text')
         allLinks = content.select('p > a')
         for link in allLinks:
