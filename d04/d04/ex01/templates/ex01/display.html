@@ -1,0 +1,25 @@
+{% extends 'ex01/base.html' %}
+
+{% block title %}Ex01: Display process of a static page.{% endblock %}
+
+{% block content %}
+<h1>Process of displaying a static page.</h1>
+<p>
+<p>The diagram below is important to understand because it is at the heart of how the Django framework works. It
+	describes the data flows and the components used to process and respond to an HTTP request. We will now get down to:
+</p>
+
+<ul>
+	<li>detail the routing of the URLs to associate the views adapted to the HTTP requests that the site will have to
+		process (including with information encoded in the URLs).</li>
+	<li>define the visualization functions and create the HTML pages which will allow the publication of information
+		intended for the users of the site.</li>
+	<li>create the templates that will allow you to publish the data in the views.</li>
+</ul>
+
+<p><img alt=""
+		src="https://media.vlpt.us/images/asas33/post/63d927f5-3845-4d9c-8512-38030de1054b/%EA%B7%B8%EB%A6%BC1.png"
+		style="display: block; margin: 0px auto;width: 70%;"></p>
+
+</p>
+{% endblock %}

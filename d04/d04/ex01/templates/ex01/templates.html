@@ -1,0 +1,175 @@
+{% extends 'ex01/base.html' %}
+
+{% block title %}Ex01: Template engine.{% endblock %}
+{% block style %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'style2.css' %}" />
+{% endblock %}
+{% block content %}
+{% verbatim %}
+<div>
+	<h1>django.template.Engine</h1>
+	<p><strong>class Engine(dirs=None, app_dirs=False, context_processors=None, debug=False, loaders=None, string_if_invalid='', file_charset='utf-8', libraries=None, builtins=None, autoescape=True)</strong></p>
+	<p>When instantiating an Engine all arguments must be passed as keyword arguments:</p>
+	<ul>
+		<li>dirs is a list of directories where the engine should look for template source files. It is used to configure filesystem.Loader.<br>defaults to an empty list.</li>
+		<li>app_dirs only affects the default value of loaders. See below.<br>It defaults to False.</li>
+		<li>autoescape controls whether HTML autoescaping is enabled.<br>It defaults to True.</li>
+		<li>context_processors is a list of dotted Python paths to callables that are used to populate the context when a template is rendered with a request. These callables take a request object as their argument and return a dict of items to be merged into the context.<br>It defaults to an empty list.<br>See RequestContext for more information.</li>
+		<li>debug is a boolean that turns on/off template debug mode. If it is True, the template engine will store additional debug information which can be used to display a detailed report for any exception raised during template rendering.<br>It defaults to False.</li>
+		<li>loaders is a list of template loader classes, specified as strings. Each Loader class knows how to import templates from a particular source. Optionally, a tuple can be used instead of a string. The first item in the tuple should be the Loader class name, subsequent items are passed to the Loader during initialization.<br>It defaults to a list containing:
+		<ul>
+			<li>'django.template.loaders.filesystem.Loader'</li>
+			<li>'django.template.loaders.app_directories.Loader' if and only if app_dirs is True.</li>
+		</ul>
+		<br>If debug is False, these loaders are wrapped in django.template.loaders.cached.Loader.
+		<br>See Loader types for details.</li>
+		<li>string_if_invalid is the output, as a string, that the template system should use for invalid (e.g. misspelled) variables.<br>It defaults to the empty string.</li>
+		<li>file_charset is the charset used to read template files on disk.<br>It defaults to 'utf-8'.</li>
+	</ul>
+	<h1>blocks</h1>
+	<p>Defines a block that can be overridden by child templates. See <strong>inheritance for more information.</strong>
+	</p>
+	<h2>Template inheritance</h2>
+	<p>The most powerful – and thus the most complex – part of Django’s template engine is template inheritance. Template
+		inheritance allows you to build a base “skeleton” template that contains all the common elements of your site and
+		defines blocks that child templates can override.</p>
+	<p>Let’s look at template inheritance by starting with an example:</p>
+
+	<xmp>
+		<!DOCTYPE html>
+		<html lang="en">
+
+		<head>
+			<link rel="stylesheet" href="style.css">
+			<title>{% block title %}My amazing site{% endblock %}</title>
+		</head>
+
+		<body>
+			<div id="sidebar">
+				{% block sidebar %}
+				<ul>
+					<li><a href="/">Home</a></li>
+					<li><a href="/blog/">Blog</a></li>
+				</ul>
+				{% endblock %}
+			</div>
+
+			<div id="content">
+				{% block content %}{% endblock %}
+			</div>
+		</body>
+
+		</html>
+	</xmp>
+
+	<p>This template, which we’ll call base.html, defines an HTML skeleton document that you might use for a two-column
+		page. It’s the job of “child” templates to fill the empty blocks with content.
+
+		In this example, the block tag defines three blocks that child templates can fill in. All the block tag does is to
+		tell the template engine that a child template may override those portions of the template.</p>
+
+	<p>A child template might look like this:</p>
+
+	<xmp>
+		{% extends "base.html" %}
+
+		{% block title %}My amazing blog{% endblock %}
+
+		{% block content %}
+		{% for entry in blog_entries %}
+		<h2>{{ entry.title }}</h2>
+		<p>{{ entry.body }}</p>
+		{% endfor %}
+		{% endblock %}
+	</xmp>
+	<p>The extends tag is the key here. It tells the template engine that this template “extends” another template. When
+		the template system evaluates this template, first it locates the parent – in this case, “base.html”.</p>
+	<p>For extra readability, you can optionally give a name to your {% endblock %} tag. For example:</p>
+	<xmp>
+		{% block content %}
+		...
+		{% endblock content %}</xmp>
+	<p>In larger templates, this technique helps you see which {% block %} tags are being closed.</p>
+	<br>
+	<p>Finally, note that you can’t define multiple block tags with the same name in the same template. This limitation
+		exists because a block tag works in “both” directions. That is, a block tag doesn’t just provide a hole to fill – it
+		also defines the content that fills the hole in the parent. If there were two similarly-named block tags in a
+		template, that template’s parent wouldn’t know which one of the blocks’ content to use.</p>
+	<h1>Loops <strong>for ... in</strong></h1>
+	<p>Loops over each item in an array, making the item available in a context variable. For example, to display a list
+		of athletes provided in athlete_list:</p>
+	<p>This tag is particularly useful in a loop:</p>
+	<xmp>
+		<ul>
+			{% for athlete in athlete_list %}
+			<li>{{ athlete.name }}</li>
+			{% endfor %}
+		</ul>
+	</xmp>
+	<p>You can loop over a list in reverse by using <strong>{% for obj in list reversed %}</strong>.</p>
+	<p>If you need to loop over a list of lists, you can unpack the values in each sublist into individual variables. For
+		example, if your context contains a list of (x,y) coordinates called points, you could use the following to output
+		the list of points:</p>
+	<xmp>{% for x, y in points %}
+		There is a point at {{ x }},{{ y }}
+		{% endfor %}</xmp>
+	<p>This can also be useful if you need to access the items in a dictionary. For example, if your context contained a
+		dictionary data, the following would display the keys and values of the dictionary:</p>
+	<xmp>{% for key, value in data.items %}
+		{{ key }}: {{ value }}
+		{% endfor %}</xmp>
+	<p>You can mix variables and strings:</p>
+	<xmp>{% for o in some_list %}
+		<tr class="{% cycle 'row1' rowvalue2 'row3' %}">
+			...
+		</tr>
+		{% endfor %}
+	</xmp>
+	<h1>if control structures</h1>
+	<p>The {% if %} tag evaluates a variable, and if that variable is “true” (i.e. exists, is not empty, and is not a
+		false boolean value) the contents of the block are output:</p>
+	<xmp>{% if athlete_list %}
+		Number of athletes: {{ athlete_list|length }}
+		{% elif athlete_in_locker_room_list %}
+		Athletes should be out of the locker room soon!
+		{% else %}
+		No athletes.
+		{% endif %}</xmp>
+	<p>In the above, if athlete_list is not empty, the number of athletes will be displayed by the {{ athlete_list|length
+		}} variable.</p>
+	<p>As you can see, the if tag may take one or several {% elif %} clauses, as well as an {% else %} clause that will be
+		displayed if all previous conditions fail. These clauses are optional.</p>
+	<p>Use of both and and or clauses within the same tag is allowed, with and having higher precedence than or e.g.:</p>
+	<xmp>{% if athlete_list and coach_list or cheerleader_list %}</xmp>
+	<p>will be interpreted like:</p>
+	<xmp>if (athlete_list and coach_list) or cheerleader_list</xmp>
+	<p>Use of actual parentheses in the if tag is invalid syntax. If you need them to indicate precedence, you should use
+		nested if tags.</p>
+
+	<p>if tags may also use the operators ==, !=, <,>, <=,>=, in, not in, is, and is not which work as follows:</p>
+	<xmp>{% if somevar == "x" %}
+		This appears if variable somevar equals the string "x"
+		{% endif %}</xmp>
+		<h1>context variables.</h1>
+		<p>A variable outputs a value from the context, which is a dict-like object mapping keys to values.</p>
+		<p>Variables are surrounded by {{ and }} like this:</p>
+		<xmp>My first name is {{ first_name }}. My last name is {{ last_name }}.</xmp>
+		<p>With a context of {'first_name': 'John', 'last_name': 'Doe'}, this template renders to:</p>
+		<xmp>My first name is John. My last name is Doe.</xmp>
+		<p>Dictionary lookup, attribute lookup and list-index lookups are implemented with a dot notation:</p>
+		<xmp>
+			{{ my_dict.key }}
+			{{ my_object.attribute }}
+			{{ my_list.0 }}</xmp>
+			<p><strong>Filters</strong></p>
+			<p>Filters transform the values of variables and tag arguments.<Br>They look like this:</p>
+			<xmp>{{ django|title }}</xmp>
+			<p>With a context of {'django': 'the web framework for perfectionists with deadlines'}, this template renders to:</p>
+			<xmp>The Web Framework For Perfectionists With Deadlines</xmp>
+			<p>Some filters take an argument:</p>
+			<xmp>{{ my_date|date:"Y-m-d" }}</xmp>
+</div>
+{% endverbatim %}
+</div>
+{% endblock %}
